@@ -92,4 +92,14 @@ async def run(command: str, args) -> None:
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         raise SystemExit("usage: bt_toyctl.py <start|stop|set|mode> [args]")
-    asyncio.run(run(sys.argv[1], sys.argv[2:]))
+    try:
+        asyncio.run(run(sys.argv[1], sys.argv[2:]))
+    except SystemExit:
+        raise
+    except Exception as exc:  # noqa: BLE001 - surface one readable line
+        print(
+            f"BLE error: {type(exc).__name__}: {exc}\n"
+            "check that the device is powered on, in range, and not connected to the phone app",
+            file=sys.stderr,
+        )
+        raise SystemExit(3) from None
