@@ -1,12 +1,46 @@
 import asyncio
+import json
 import os
 import sys
+from pathlib import Path
 
-from bleak import BleakClient
+from bleak import BleakClient, BleakScanner
 
 # The plugin passes the address through this variable; run the script by hand
 # with:  set TOY_ADDRESS=AA:BB:CC:DD:EE:FF  (PowerShell: $env:TOY_ADDRESS="...")
 ADDRESS = os.environ.get("TOY_ADDRESS", "").strip()
+
+# Zero-config fallback: remember the device we found once, next to this script.
+CACHE = Path(__file__).with_name("toy-device.json")
+# Names the device advertises; extend freely.
+NAME_HINTS = ("TF-BHPRO", "TFBHPRO", "BHPRO", "TF-BH", "春风", "CHUNFENG")
+
+
+def remember(address: str) -> None:
+    try:
+        CACHE.write_text(json.dumps({"address": address}), encoding="utf-8")
+    except OSError:
+        pass
+
+
+def recall() -> str:
+    try:
+        return str(json.loads(CACHE.read_text(encoding="utf-8")).get("address", "")).strip()
+    except (OSError, ValueError):
+        return ""
+
+
+async def discover() -> str:
+    """Scan for a device whose name looks like the target and cache it."""
+    print("no address configured, scanning 8s ...", file=sys.stderr)
+    devices = await BleakScanner.discover(timeout=8)
+    for device in devices:
+        name = (device.name or "").upper()
+        if any(hint.upper() in name for hint in NAME_HINTS):
+            remember(device.address)
+            print(f"found {device.address} ({device.name})", file=sys.stderr)
+            return device.address
+    return ""
 FFB7 = "0000ffb7-0000-1000-8000-00805f9b34fb"
 PROP_RUN = 0x1D
 PROP_MODE = 0x1E
@@ -19,9 +53,10 @@ def frame(sn: int, prop: int, value: int) -> bytes:
 
 
 async def run(command: str, args) -> None:
-    if ADDRESS == "":
-        raise SystemExit("TOY_ADDRESS is not set (see README)")
-    async with BleakClient(ADDRESS, timeout=20) as client:
+    address = ADDRESS or recall() or await discover()
+    if address == "":
+        raise SystemExit("device not found; set TOY_ADDRESS or run scripts/scan.py")
+    async with BleakClient(address, timeout=20) as client:
         sn = 1
 
         async def write(prop: int, value: int) -> None:

@@ -99,11 +99,12 @@ export function apply(ctx, config = {}) {
   }
 
   const runPython = async (args) => {
-    if (settings.address === '') throw new Error('device address is not configured')
+    // An empty address is fine: the script scans for the device by name and
+    // caches what it finds, so a fresh install needs no configuration.
     const { stdout } = await execFileAsync(settings.pythonPath, [settings.scriptPath, ...args], {
       windowsHide: true,
-      timeout: 25000,
-      env: { ...process.env, TOY_ADDRESS: settings.address },
+      timeout: 40000,
+      env: { ...process.env, ...(settings.address === '' ? {} : { TOY_ADDRESS: settings.address }) },
     })
     return String(stdout).trim()
   }
