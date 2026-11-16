@@ -19,24 +19,30 @@ device directly from the computer — no phone app, no cloud.
 
 ## 快速安装（从 GitHub）
 
+前提：本机有 Python 3.9+，并且装过一次 `bleak`：
+
 ```powershell
-# 1. 下载仓库
-git clone https://github.com/RadeyesDrosophilaProMax/dsh-tf-bhpro.git
-
-# 2. 装依赖
 pip install bleak
-
-# 3. 扫描设备，拿到地址
-python dsh-tf-bhpro/scripts/scan.py
-
-# 4. 把地址写进 dsh-tf-bhpro/cordis.patch.yml 的 address
-
-# 5. 在 DSH 里安装（插件管理面板选目录，或让 Agent 执行）
-plugin_manager install_bundle <仓库所在路径>
 ```
 
-没有 git 的话，直接下载 zip 解压：
-`https://github.com/RadeyesDrosophilaProMax/dsh-tf-bhpro/archive/refs/heads/main.zip`
+然后在 DSH 里让 Agent 执行（一条命令，直接从 GitHub 装）：
+
+```
+plugin_manager install_bundle github:RadeyesDrosophilaProMax/dsh-tf-bhpro
+```
+
+**不需要填设备地址**：插件第一次动设备时会自动扫描附近设备，按名字
+（TF-BHPRO / BHPRO / 春风…）找到它并把地址缓存到 `scripts/toy-device.json`。
+
+想手动指定地址也可以：编辑装好后的 `cordis.patch.yml`，把 `address` 填成
+`python scripts/scan.py` 扫描到的值，然后重新安装。
+
+想用 git 开发：
+
+```powershell
+git clone https://github.com/RadeyesDrosophilaProMax/dsh-tf-bhpro.git
+plugin_manager install_bundle <仓库所在路径>
+```
 
 ## 1. Requirements
 

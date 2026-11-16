@@ -7,8 +7,9 @@
         pythonPath: python
         # defaults to scripts/bt_toyctl.py inside this bundle
         scriptPath: ""
-        # scan with:  python scripts/scan.py
-        address: "AA:BB:CC:DD:EE:FF"
+        # leave empty to scan for the device by name (scripts/bt_toyctl.py)
+        # or scan with:  python scripts/scan.py
+        address: ""
         # false = the model never sees a tool; the panel and the keyword router
         # drive the device, so the prompt can focus on the persona
         exposeTool: false
