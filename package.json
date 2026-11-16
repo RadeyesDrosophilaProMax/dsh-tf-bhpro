@@ -1,6 +1,6 @@
 {
   "name": "dsh-tf-bhpro",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "type": "module",
   "description": "DSH plugin: control a TF-BHPRO BLE device from a panel and from chat keywords, without the phone app",
@@ -9,11 +9,28 @@
     ".": "./index.js",
     "./client": "./client.js"
   },
-  "files": ["index.js", "client.js", "cordis.patch.yml", "scripts/", "docs/", "README.md", "LICENSE"],
-  "keywords": ["dsh", "cordis", "ble", "bluetooth", "tf-bhpro", "plugin"],
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "scripts/",
+    "docs/",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh",
+    "cordis",
+    "ble",
+    "bluetooth",
+    "tf-bhpro",
+    "plugin"
+  ],
   "license": "MIT",
   "dsh": {
-    "bundle": { "patch": "./cordis.patch.yml" },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
     "client": {
       "platform": "web",
       "immediately": true

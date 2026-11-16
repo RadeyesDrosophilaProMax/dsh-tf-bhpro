@@ -2,7 +2,7 @@
  * Client half: toy control panel with user-named presets.
  */
 window.__ModuleLoader__.load({
-  id: '@local/dsh-toy',
+  id: 'dsh-tf-bhpro',
   factory(require) {
     const React = require('react')
     const h = React.createElement

@@ -13,7 +13,7 @@ const execFileAsync = promisify(execFile)
  * Property 0x1E selects one of four patterns (1-4); property 0x1F is a
  * continuous speed 0-15 that the device keeps after the link closes.
  *
- * @module @local/dsh-toy
+ * @module dsh-tf-bhpro
  */
 
 export const name = 'toy-control'
