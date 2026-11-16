@@ -1,0 +1,14 @@
+# dsh-tf-bhpro bundle: panel + keyword router for a TF-BHPRO BLE device.
+- insert:
+    - id: toy-control
+      name: dsh-tf-bhpro
+      config:
+        # python that has `bleak` installed
+        pythonPath: python
+        # defaults to scripts/bt_toyctl.py inside this bundle
+        scriptPath: ""
+        # scan with:  python scripts/scan.py
+        address: "AA:BB:CC:DD:EE:FF"
+        # false = the model never sees a tool; the panel and the keyword router
+        # drive the device, so the prompt can focus on the persona
+        exposeTool: false

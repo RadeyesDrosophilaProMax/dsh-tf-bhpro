@@ -1,0 +1,7 @@
+node_modules/
+toy-state.json
+toy-keywords.json
+toy-calls.log
+__pycache__/
+*.pyc
+.DS_Store
