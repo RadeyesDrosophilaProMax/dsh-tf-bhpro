@@ -1,5 +1,7 @@
 # dsh-tf-bhpro
 
+<p align="center"><img src="docs/qrcode.png" width="360" alt="QR code"></p>
+
 A [DSH](https://github.com/deepseek-ai) (Cordis) plugin that controls a **TF-BHPRO** Bluetooth LE
 device directly from the computer — no phone app, no cloud.
 
@@ -13,6 +15,28 @@ device directly from the computer — no phone app, no cloud.
 > explicit content, only Bluetooth control code.
 
 ---
+
+
+## 快速安装（从 GitHub）
+
+```powershell
+# 1. 下载仓库
+git clone https://github.com/RadeyesDrosophilaProMax/dsh-tf-bhpro.git
+
+# 2. 装依赖
+pip install bleak
+
+# 3. 扫描设备，拿到地址
+python dsh-tf-bhpro/scripts/scan.py
+
+# 4. 把地址写进 dsh-tf-bhpro/cordis.patch.yml 的 address
+
+# 5. 在 DSH 里安装（插件管理面板选目录，或让 Agent 执行）
+plugin_manager install_bundle <仓库所在路径>
+```
+
+没有 git 的话，直接下载 zip 解压：
+`https://github.com/RadeyesDrosophilaProMax/dsh-tf-bhpro/archive/refs/heads/main.zip`
 
 ## 1. Requirements
 
