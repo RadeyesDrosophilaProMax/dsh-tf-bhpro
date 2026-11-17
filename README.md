@@ -91,13 +91,13 @@ independently of the model. Defaults:
 
 | Group | Behaviour | Default words |
 |---|---|---|
-| `nearFinish` | speed up | 要射出来了 |
-| `stop` | stop | 结束 / 射出来了 / 拔出来了 |
+| `nearFinish` | speed up | XXXXX |
+| `stop` | stop | 结束 / XXXX / XXXX |
 | `faster` | + speed | 快一点 / 快点 / 加速 / 用力 / 使劲 / 再快 … |
 | `slower` | − speed | 慢一点 / 慢点 / 减速 / 轻一点 / 轻柔 … |
-| `status` | query only | 状态 / 什么状态 / 舒服吗 / 在动吗 … |
-| `modeSwitch` | random other mode | 换个动作 / 换个姿势 |
-| `start` | start (random mode, slow gear) | 插进去了 / 动一下 / 继续动 / 别停 … |
+| `status` | query only | 状态 / 什么状态 / XXX / 在动吗 … |
+| `modeSwitch` | random other mode | 换个动作 / XXXX |
+| `start` | start (random mode, slow gear) | XXXX / 动一下 / 继续动 / 别停 … |
 
 Rules: one action per message, first match wins, in the order above. Every hit is
 appended to `toy-calls.log` next to the script (`router: …`).
